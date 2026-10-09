@@ -8,6 +8,7 @@ public class Enemy implements Character {
 		return true;
 	}
 	
+	@Override
 	public void kill() {
 		System.out.println("¡Ahhhggg, me mataste, bastardo!");
 	}

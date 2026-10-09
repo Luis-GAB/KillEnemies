@@ -8,4 +8,10 @@ public class Friend implements Character {
 		return false;
 	}
 
+	@Override
+	public void kill() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
