@@ -25,8 +25,17 @@ public class Hero implements Character {
 		enemigosMat++;
 	}
 	
+	public void attack(Friend friend) {
+		System.out.println("¡Has matado a un amigo!");
+		friend.kill();
+	}
+	
+	public void defend(Enemy enemy) {
+		System.out.println("¡Has defendido a un enemigo!");
+	}
+	
 	public void defend(Friend friend) {
-		System.out.println("¡He defendido a un amigo!");
+		System.out.println("¡Has defendido a un amigo!");
 		aliadosDef++;
 	}
 
