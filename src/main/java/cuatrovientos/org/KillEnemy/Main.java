@@ -38,8 +38,9 @@ public class Main {
         	
         	if (accion.equalsIgnoreCase("matar")) {
         		matar(personajeRevisar);
+        		listaPersonajes.remove(personajeRevisar);
         	} else if (accion.equalsIgnoreCase("defender")) {
-        		
+        		defender(personajeRevisar);
         	}
         	
         	if (personajeRevisar.isEnemy()) {
@@ -87,6 +88,7 @@ public class Main {
     	if (personajeRevisar.isEnemy()) {
     		Enemy enemigoDefender = (Enemy) personajeRevisar;
     		jugador.defend(enemigoDefender);
+    		listaPersonajes.add(new Enemy());
     	} else {
     		Friend aliadoDefender = (Friend) personajeRevisar;
     		jugador.defend(aliadoDefender);

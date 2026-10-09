@@ -12,5 +12,10 @@ public class Enemy implements Character {
 	public void kill() {
 		System.out.println("¡Ahhhggg, me mataste, bastardo!");
 	}
+	
+	@Override
+	public void heal() {
+		System.out.println("¡Has curado a un enemigo!");
+	}
 
 }

@@ -19,6 +19,9 @@ public class Hero implements Character {
 	@Override
 	public void kill() {}
 	
+	@Override
+	public void heal() {}
+	
 	public void attack(Enemy enemy) {
 		System.out.println("¡Has matado a un enemigo!");
 		enemy.kill();
@@ -31,11 +34,11 @@ public class Hero implements Character {
 	}
 	
 	public void defend(Enemy enemy) {
-		System.out.println("¡Has defendido a un enemigo!");
+		enemy.heal();
 	}
 	
 	public void defend(Friend friend) {
-		System.out.println("¡Has defendido a un amigo!");
+		friend.heal();
 		aliadosDef++;
 	}
 

@@ -11,7 +11,11 @@ public class Friend implements Character {
 	@Override
 	public void kill() {
 		// TODO Auto-generated method stub
-		
+	}
+	
+	@Override
+	public void heal() {
+		System.out.println("¡Has curado al aliado!");
 	}
 
 }
