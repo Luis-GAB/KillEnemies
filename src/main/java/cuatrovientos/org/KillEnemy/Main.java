@@ -24,13 +24,29 @@ public class Main {
     	File archivo = new File("partida.dat");
     	String accion = "";
     	
+    	System.out.print("¡Bienvenido a EnemyKill!");
     	if (archivo.exists()) {
             // Ya existe una partida: cargarla
-            listaPersonajes = cargarPartida();
-
-            if (listaPersonajes == null) {
-                crearPersonajes();
-            }
+    		while(!(accion.equalsIgnoreCase("si") || accion.equalsIgnoreCase("no"))) {
+        		System.out.print("¿Quieres iniciar nueva partidad?(si/no): ");
+        		accion = readFromConsole.nextLine();
+        	}
+    		
+    		if (accion.equalsIgnoreCase("no")) {
+    			System.out.println("   Cargando partida guardada...");
+    			listaPersonajes = cargarPartida();
+    			
+    			if (listaPersonajes == null) {
+    				System.out.println("   La partida esta vacia.");
+    				System.out.println("   Nueva partida generada.");
+                    crearPersonajes();
+                } else {
+                	System.out.println("   Partida cargada correctamente.");
+                }
+    		} else {
+    			System.out.println("   Nueva partida generada.");
+    			crearPersonajes();
+    		}
 
         } else {
             // No existe partida: crear los personajes
@@ -39,6 +55,14 @@ public class Main {
         
     	Collections.shuffle(listaPersonajes);
         showCharacters();
+        
+        if (aliadosLista > 0 && enemigosLista == 0) {
+    		System.out.println("Todos los personajes restantes son aliados.");
+    		System.out.println("Para mejor calidad, se le recomienda que inicies una nueva partida.");
+    	} else if (enemigosLista > 0 && aliadosLista == 0) {
+    		System.out.println("Todos los personajes restantes son enemigos.");
+    		System.out.println("Para mejor calidad, se le recomienda que inicies una nueva partida.");
+    	}
         
         numRevisados = 0;
         
@@ -60,22 +84,16 @@ public class Main {
         		defender(personajeRevisar);
         	}
         	
-        	//if (personajeRevisar.isEnemy()) {
-        	//Enemy enemigoAtacar = (Enemy) personajeRevisar;
-        	//System.out.println("¡El personaje nº" + numRevisados + " es un enemigo! ¡Matalo!");
-        	//jugador.attack(enemigoAtacar);
-        	//} else {
-        	//Friend aliadoDefender = (Friend) personajeRevisar;
-        	//System.out.println("¡El personaje nº" + numRevisados + " es un aliado!");
-        	//jugador.defend(aliadoDefender);
-        	//}
         	numRevisados++;
         	accion = "";
         }
         
+        System.out.println("");
+        System.out.println("Resultados de la partida: ");
+        System.out.println("Enemigos matados: " + jugador.enemigosMat + "/" + enemigosLista);
+        System.out.println("Aliados defendidos: " + jugador.aliadosDef + "/" + aliadosLista);
         guardarPartida(listaPersonajes);
-        readFromConsole.close();
-        
+        readFromConsole.close();  
     }
     
     public static void crearPersonajes() {
@@ -87,14 +105,15 @@ public class Main {
         }
     }
     
+    
     public static void showCharacters() {
     	System.out.println("Lista personajes: ");
     	for (Character personajeRevisar: listaPersonajes) {
         	if (personajeRevisar.isEnemy()) {
-        		System.out.println("El personaje nº" + numRevisados + " es un enemigo");
+        		System.out.println("-El personaje nº" + numRevisados + " es un enemigo");
         		enemigosLista++;
         	} else {
-        		System.out.println("El personaje nº" + numRevisados + " es un aliado");
+        		System.out.println("-El personaje nº" + numRevisados + " es un aliado");
         		aliadosLista++;
         	}
         	numRevisados++;
@@ -102,6 +121,7 @@ public class Main {
         System.out.println("Enemigos: " + enemigosLista);
         System.out.println("Aliados: " + aliadosLista);
     }
+    
     
     public static void matar(Character personajeRevisar) {
     	if (personajeRevisar.isEnemy()) {
@@ -113,6 +133,7 @@ public class Main {
     	}
     }
     
+    
     public static void defender(Character personajeRevisar) {
     	if (personajeRevisar.isEnemy()) {
     		Enemy enemigoDefender = (Enemy) personajeRevisar;
@@ -123,6 +144,7 @@ public class Main {
     		jugador.defend(aliadoDefender);
     	}
     }
+    
     
     public static void guardarPartida(ArrayList<Character> listaPersonajes) {
         try (ObjectOutputStream salida = new ObjectOutputStream(
@@ -136,6 +158,7 @@ public class Main {
             e.printStackTrace();
         }
     }
+    
 
     @SuppressWarnings("unchecked")
     public static ArrayList<Character> cargarPartida() {
@@ -150,5 +173,4 @@ public class Main {
             return null;
         }
     }
-    
 }
