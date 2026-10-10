@@ -1,6 +1,8 @@
 package cuatrovientos.org.KillEnemy;
 
-public interface Character {
+import java.io.Serializable;
+
+public interface Character extends Serializable {
 	
 	public boolean isEnemy();
 
