@@ -1,6 +1,8 @@
 package cuatrovientos.org.KillEnemy;
 
 public class Hero implements Character {
+	
+	private static final long serialVersionUID = 1L;
 
 	public int enemigosMat;
 	public int aliadosDef;

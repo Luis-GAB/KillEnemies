@@ -1,6 +1,8 @@
 package cuatrovientos.org.KillEnemy;
 
 public class Enemy implements Character {
+	
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public boolean isEnemy() {
